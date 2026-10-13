@@ -1,6 +1,19 @@
 // TODO-2: implement the Forward+ fragment shader
-
 // See naive.fs.wgsl for basic fragment shader setup; this shader should use light clusters instead of looping over all lights
+@group(${bindGroup_scene}) @binding(0) var<uniform> camera: CameraUniforms;
+@group(${bindGroup_scene}) @binding(1) var<storage, read> lightSet: LightSet;
+@group(${bindGroup_scene}) @binding(2) var<storage, read> clusterSet: ClusterSet;
+
+@group(${bindGroup_material}) @binding(0) var diffuseTex: texture_2d<f32>;
+@group(${bindGroup_material}) @binding(1) var diffuseTexSampler: sampler;
+
+struct FragmentInput
+{
+    @builtin(position) screenPos: vec4f,
+    @location(0) worldPos: vec3f,
+    @location(1) modelNor: vec3f,
+    @location(2) uv: vec2f
+}
 
 // ------------------------------------
 // Shading process:
@@ -14,3 +27,21 @@
 //     Add the calculated contribution to the total light accumulation.
 // Multiply the fragment’s diffuse color by the accumulated light contribution.
 // Return the final color, ensuring that the alpha component is set appropriately (typically to 1).
+@fragment
+fn main(in: FragmentInput) -> @location(0) vec4f
+{
+    let diffuseColor = textureSample(diffuseTex, diffuseTexSampler, in.uv);
+    if (diffuseColor.a < 0.5f) {
+        discard;
+    }
+
+    // NCHORTEK TODO: replace this with debug views or cluster-based lighting
+    var totalLightContrib = vec3f(0, 0, 0);
+    for (var lightIdx = 0u; lightIdx < lightSet.numLights; lightIdx++) {
+        let light = lightSet.lights[lightIdx];
+        totalLightContrib += calculateLightContrib(light, in.worldPos, normalize(in.modelNor));
+    }
+
+    var finalColor = diffuseColor.rgb * totalLightContrib;
+    return vec4f(finalColor, 1.0);
+}
