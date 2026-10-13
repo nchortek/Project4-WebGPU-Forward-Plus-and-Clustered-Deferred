@@ -52,7 +52,7 @@ export class ForwardPlusRenderer extends renderer.Renderer {
                 },
                 {
                     binding: 2,
-                    resource: { buffer: this.lights.lightSetStorageBuffer }
+                    resource: { buffer: this.lights.clusterSetStorageBuffer }
                 }
             ]
         });
@@ -109,7 +109,7 @@ export class ForwardPlusRenderer extends renderer.Renderer {
         this.lights.doLightClustering(encoder);
 
         const renderPass = encoder.beginRenderPass({
-            label: "naive render pass",
+            label: "forward plus render pass",
             colorAttachments: [
                 {
                     view: canvasTextureView,
