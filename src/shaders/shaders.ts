@@ -29,8 +29,12 @@ export const constants = {
     bindGroup_material: 2,
 
     moveLightsWorkgroupSize: 128,
+    clusteringWorkgroupSizeX: 4,
+    clusteringWorkgroupSizeY: 4,
+    clusteringWorkgroupSizeZ: 4,
 
-    lightRadius: 2
+    lightRadius: 2,
+    maxLightsPerCluster: 32
 };
 
 // =================================
