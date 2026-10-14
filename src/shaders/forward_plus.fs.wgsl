@@ -38,10 +38,17 @@ fn main(in: FragmentInput) -> @location(0) vec4f
         discard;
     }
 
-    // NCHORTEK TODO: replace this with debug views or cluster-based lighting
+    let zViewDistance: f32 = -vec4f(camera.viewMat * vec4f(in.worldPos, 1.0)).z;
+    let zSliceIdx: u32 = min(u32(max(log2(zViewDistance) * clusterZScale + clusterZBias, 0.0)), u32(${gridDimZ}) - 1u);
+    let tilePixelDims: vec2f = camera.screenResolution / vec2f(clusterSet.gridDims.xy);
+    let tileIdx: vec2u = vec2u(in.screenPos.xy / tilePixelDims);
+    let flatClusterIdx = tileIdx.x
+        + tileIdx.y * clusterSet.gridDims.x
+        + zSliceIdx * clusterSet.gridDims.x * clusterSet.gridDims.y;
+
     var totalLightContrib = vec3f(0, 0, 0);
-    for (var lightIdx = 0u; lightIdx < lightSet.numLights; lightIdx++) {
-        let light = lightSet.lights[lightIdx];
+    for (var lightIdx = 0u; lightIdx < clusterSet.clusters[flatClusterIdx].numLights; lightIdx++) {
+        let light = lightSet.lights[clusterSet.clusters[flatClusterIdx].lightIndices[lightIdx]];
         totalLightContrib += calculateLightContrib(light, in.worldPos, normalize(in.modelNor));
     }
 

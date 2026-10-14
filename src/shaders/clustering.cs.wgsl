@@ -94,7 +94,7 @@ fn assignLightsToClusters(@builtin(global_invocation_id) global_id: vec3u) {
     let bounds: ClusterBounds = computeClusterBounds(global_id);
 
     // Assign lights to the cluster
-    let flatClusterId = global_id.x
+    let flatClusterIdx: u32 = global_id.x
         + global_id.y * clusterSet.gridDims.x
         + global_id.z * clusterSet.gridDims.x * clusterSet.gridDims.y;
 
@@ -106,10 +106,10 @@ fn assignLightsToClusters(@builtin(global_invocation_id) global_id: vec3u) {
         }
 
         if (doesSphereIntersectBoundingBox(lightSet.lights[lightIdx].pos, bounds)) {
-            clusterSet.clusters[flatClusterId].lightIndices[lightCount] = lightIdx;
+            clusterSet.clusters[flatClusterIdx].lightIndices[lightCount] = lightIdx;
             lightCount++;
         }
     }
 
-    clusterSet.clusters[flatClusterId].numLights = lightCount;
+    clusterSet.clusters[flatClusterIdx].numLights = lightCount;
 }
