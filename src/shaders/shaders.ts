@@ -34,7 +34,13 @@ export const constants = {
     clusteringWorkgroupSizeZ: 4,
 
     lightRadius: 2,
-    maxLightsPerCluster: 32
+    maxLightsPerCluster: 32,
+
+    gridDimX: 16,
+    gridDimY: 9,
+    gridDimZ: 24,
+    farPlane: Camera.farPlane,
+    nearPlane: Camera.nearPlane
 };
 
 // =================================

@@ -15,6 +15,9 @@ struct FragmentInput
     @location(2) uv: vec2f
 }
 
+const clusterZScale: f32 = f32(${gridDimZ}) / log2(f32(${farPlane}) / f32(${nearPlane}));
+const clusterZBias: f32 = -f32(${gridDimZ}) * log2(f32(${nearPlane})) / log2(f32(${farPlane}) / f32(${nearPlane}));
+
 // ------------------------------------
 // Shading process:
 // ------------------------------------

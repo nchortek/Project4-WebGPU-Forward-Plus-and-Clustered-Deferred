@@ -29,7 +29,7 @@ export class Lights {
     moveLightsComputePipeline: GPUComputePipeline;
 
     // TODO-2: add layouts, pipelines, textures, etc. needed for light clustering here
-    static readonly gridDims = new Uint32Array([16, 9, 24]);
+    static readonly gridDims = new Uint32Array([shaders.constants.gridDimX, shaders.constants.gridDimY, shaders.constants.gridDimZ]);
     static readonly numClusters = Lights.gridDims[0] * Lights.gridDims[1] * Lights.gridDims[2];
     static readonly clusterSize = Uint32Array.BYTES_PER_ELEMENT + Uint32Array.BYTES_PER_ELEMENT * shaders.constants.maxLightsPerCluster;
     clusterSetStorageBuffer: GPUBuffer;
