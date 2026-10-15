@@ -45,11 +45,11 @@ fn computeClusterBounds(clusterId: vec3u) -> ClusterBounds {
 
     let minPointScreen: vec4f = vec4f(
         vec2f(clusterId.xy) * tilePixelDims,
-        -1.0,
+        0.0,
         1.0);
     let maxPointScreen: vec4f = vec4f(
         (vec2f(clusterId.xy) + 1.0) * tilePixelDims,
-        -1.0,
+        0.0,
         1.0);
 
     let minPointView: vec3f = convertScreenToView(minPointScreen).xyz;

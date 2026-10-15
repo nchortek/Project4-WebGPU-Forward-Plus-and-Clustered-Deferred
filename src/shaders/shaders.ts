@@ -35,7 +35,7 @@ export const constants = {
     clusteringWorkgroupSizeZ: 4,
 
     lightRadius: 2,
-    maxLightsPerCluster: 32,
+    maxLightsPerCluster: 200,
 
     gridDimX: 16,
     gridDimY: 9,
