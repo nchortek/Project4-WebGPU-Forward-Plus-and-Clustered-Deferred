@@ -1,3 +1,6 @@
+
+
+
 WebGPU Forward+ and Clustered Deferred Shading
 ======================
 
@@ -15,7 +18,7 @@ http://nchortek.github.io/Project4-WebGPU-Forward-Plus-and-Clustered-Deferred
 
 ### Demo Video/GIF
 
-
+<video src="https://github.com/user-attachments/assets/6765d3ec-849a-4bdc-974a-7abb03ec2b66"/>
 
 ## Features Implemented
 
