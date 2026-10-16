@@ -18,7 +18,7 @@ http://nchortek.github.io/Project4-WebGPU-Forward-Plus-and-Clustered-Deferred
 
 ### Demo Video/GIF
 
-<video src="https://github.com/user-attachments/assets/ca95ba97-37fe-4c6b-90bc-826a60d49028" controls></video>
+https://github.com/user-attachments/assets/ca95ba97-37fe-4c6b-90bc-826a60d49028
 
 ## Features Implemented
 
